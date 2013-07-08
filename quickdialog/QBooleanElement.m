@@ -66,15 +66,13 @@
         cell.accessoryView = boolSwitch;
 
     } else {
-        UIButton *boolButton = [[UIButton alloc] init];
-        [boolButton setImage:self.offImage forState: UIControlStateNormal];
-        [boolButton setImage:self.onImage forState: UIControlStateSelected];
-        [boolButton setImage:self.onImage forState: UIControlStateSelected | UIControlStateDisabled];
-        cell.accessoryView = boolButton;
-        boolButton.enabled = self.enabled;
-        boolButton.selected = self.boolValue;
-        [boolButton sizeToFit];
-        [boolButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        UISwitch *boolSwitch = [[UISwitch alloc] init];
+        boolSwitch.on = self.boolValue;
+        boolSwitch.enabled = self.enabled;
+        boolSwitch.onImage = self.onImage;
+        boolSwitch.offImage = self.offImage;
+        [boolSwitch addTarget:self action:@selector(switched:) forControlEvents:UIControlEventValueChanged];
+        cell.accessoryView = boolSwitch;
     }
     return cell;
 }
